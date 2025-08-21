@@ -1,0 +1,36 @@
+Data Binding: 
+It is synchronization between controller(JS) and template(HTML) 
+                    OR
+when you map your data from backend(JS) to frontend(HTML)
+ways of data-binding:
+1) using expressions
+2) using getter properties
+
+[No need to use @track as per the Summer'20 updates but still for complex data structure we can use @track ] 
+@track decorator
+It is used to make private properties or methods reactive within the component
+
+
+:::::::::::::::::::Mounting Phase:::::::::::::::::::::::::::::::
+constructor()
+connectedCallback()
+render()
+renderedCallback()
+(if no child)
+constructor->update public properties(if any)->comp inserted into the DOM->connectedCallback->component rendered->renderedCallback() called->END
+(if child exist)
+constructor->update public properties(if any)->comp inserted into the DOM->connectedCallback->component rendered->same process for child component->
+renderedCallback() called->END
+:::::::::::::::::::Unmounting Phase::::::::::::::::::::::::::::
+disconnectedCallback()
+:::::::::::::::::::Error Phase:::::::::::::::::::::::::::::::::
+errorCallback()
+
+1)
+use connectedCallback for Fetch data, set up caches, listen for events.
+don't load values or set properties in connectedCallback().
+2) 
+do not change the state or update the property of a component
+do not update the @wire adapter configuration object property in renderedCallback().
+
+

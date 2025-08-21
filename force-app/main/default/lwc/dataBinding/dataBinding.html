@@ -1,5 +1,12 @@
 <template>
     <lightning-card>
-        <div>My Name is {name}</div>
+        <div class="slds-p-around_medium">
+            <div>
+                <lightning-input label="Enter First Name" name="firstName" onchange={handleChange}></lightning-input>
+                <lightning-input label="Last Name" name="lastName" onchange={handleChange}></lightning-input>
+            </div>
+            <div>My Name is {name}</div>
+            <div>Hi, {fullName}</div>
+        </div>
     </lightning-card>
 </template>

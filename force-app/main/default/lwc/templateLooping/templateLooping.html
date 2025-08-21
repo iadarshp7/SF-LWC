@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Product Image -- for:each">
+        <template for:each={productUrl} for:item="product">
+            <img src={product} alt="Product Image" height="100px" width="100px" key={product} />
+        </template>
+    </lightning-card>
+    <lightning-card title="Product Image -- iterator">
+        <template iterator:i={productUrl}>
+            <div key={i.value}>
+                <img src={i.value} alt="Product Image" height="100px" width="100px" />
+            </div>
+        </template>
+    </lightning-card>
+</template>

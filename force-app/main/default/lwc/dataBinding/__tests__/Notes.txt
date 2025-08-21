@@ -1,4 +1,0 @@
-Data Binding: when you map your data from backend(JS) to frontend(HTML)
-ways of data-binding:
-1) using expressions
-2) using getter properties
