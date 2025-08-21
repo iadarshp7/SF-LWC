@@ -33,4 +33,4 @@ don't load values or set properties in connectedCallback().
 do not change the state or update the property of a component
 do not update the @wire adapter configuration object property in renderedCallback().
 
-
+Message  to git
