@@ -1,2 +1,24 @@
-Asynchronous Apex::::::
-1. future
+Asynchronous Apex::::::>
+1. annotate your method with @future
+2. Batch class
+public class OppProcessor implements Database.Batchable<sObject>, Database.stateful{
+   public static recordCount = 0;
+   public Database.QueryLocator start(Database.BatchableContext batchContext){
+      return Database.getQueryLocator([SELECT Id, Name FROM Opportunity]);
+   }
+   public void execute(Database.BatchableContext batchContext, List<opportunity> OppList){
+      for(Opportunity op:OppList){
+        op.LeadSource='Web';
+      }
+      update OppList;
+      recordCount+=OppList.size();
+   }
+   public void finish(Database.BatchableContext batchContext){
+     System.debug('Batch class executed with '+recordCount+' records');
+   }
+}
+
+how to Invoke a batch class
+
+OppProcessor batchClass = new OppProcessor();
+Id batchId = Database.executeBatch(batchClass);
