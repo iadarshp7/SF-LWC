@@ -18,7 +18,16 @@ public class OppProcessor implements Database.Batchable<sObject>, Database.state
    }
 }
 
-how to Invoke a batch class
+<how to Invoke a batch class>
 
 OppProcessor batchClass = new OppProcessor();
 Id batchId = Database.executeBatch(batchClass);
+
+3. Queueable 
+public class MyQueueableClass implements Queueable{
+    public void execute(QueueableContext queueContext){}
+}
+
+<how to Invoke a queueable class>
+MyQueueableClass i=new MyQueueableClass(accList, accId);
+Id queueId = System.enqueueJob(i);
