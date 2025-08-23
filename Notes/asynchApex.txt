@@ -31,3 +31,25 @@ public class MyQueueableClass implements Queueable{
 <how to Invoke a queueable class>
 MyQueueableClass i=new MyQueueableClass(accList, accId);
 Id queueId = System.enqueueJob(i);
+
+<chain of Queueable apex classes>
+public class FirstJob implements Queueable{
+      public void execute(QueueableContext context){
+          System.enqueueJob(new SecondJob());
+      }
+}
+
+4. Schedulable
+
+public class MySchedulable implements Schedulable{
+      public void execute(SchedulableContext context){
+      }
+}
+
+
+<To Invoke>
+
+MySchedulable reminder = new MySchedulable();
+//sec min hours DayOfMonth Month DayOfWeek Year
+String sch = '0 0 0 23 8 ? 2026';
+String jobId = System.schedule('Remind the Owner ',sch, reminder);
