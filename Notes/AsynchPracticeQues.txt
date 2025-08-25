@@ -1,0 +1,93 @@
+1. Batch Apex for Large Data Updates
+
+Scenario:
+Your org has 5 million `Contact` records, and the business wants to update a custom field `Is_Active__c` to `false` for all contacts 
+whose `LastActivityDate` is more than 2 years old.
+
+*Question:*
+
+* Write a **Batch Apex** class to handle this.
+* How will you ensure it runs within governor limits?
+* How would you schedule this batch to run every Sunday at midnight?
+
+*Answer:*
+Apex Class: ContactUpdateActiveStatusBatch
+#######################################################################################################################################################
+
+2. Queueable for API Callouts
+
+Scenario:
+When a new `Case` is created, you need to make an external API call to a third-party system (say a chatbot) to notify about the case details. This must not block the transaction.
+
+*Question:*
+
+* Write a **Queueable Apex** class to make the callout.
+* Ensure that it handles failures and retries gracefully.
+#######################################################################################################################################################
+
+3. Future Method for Quick Field Update
+
+Scenario:
+When an `Opportunity` is closed, you need to update the related `Account` `Last_Closed_Deal_Date__c` field asynchronously (to avoid hitting mixed DML errors or 
+heavy synchronous processing).
+
+ *Question:*
+
+* Write a **future method** that accepts Opportunity Ids and updates Accounts.
+* How will you pass multiple records into the future method?
+#######################################################################################################################################################
+
+4. Chaining Queueables
+
+Scenario:
+Your client wants to send a **welcome email** to a customer when an `Order` is placed, and then immediately after, call an API to update the ERP system with order details.
+
+*Question:*
+
+* Write a **Queueable chain** that ensures these happen in sequence.
+* What would you do if the ERP call fails (e.g., retry or store error logs)?
+#######################################################################################################################################################
+
+5. Batch + Queueable Hybrid
+
+Scenario:
+You need to process a million `Lead` records and send their data to an external system. Each batch of 200 records must trigger a **callout**.
+
+*Question:*
+
+* Show how you’ll implement a **Batch Apex** with `Database.AllowsCallouts`.
+* Bonus: Use a **Queueable** inside `finish()` to send a summary email to the admin once the batch is complete.
+#######################################################################################################################################################
+
+6. Schedulable Apex
+
+**Scenario:**
+Your company wants to run a nightly job at 2 AM that deactivates all `User` accounts that have been inactive for more than 180 days.
+
+*Question:*
+
+* Write a **Schedulable Apex** class to achieve this.
+* How would you schedule this without going to Setup → Apex Classes manually?
+#######################################################################################################################################################
+
+7. Error Handling in Async Jobs
+
+**Scenario:**
+Suppose you wrote a Batch Apex to clean up orphaned `CaseComment` records. Sometimes the batch fails due to unexpected null pointer exceptions.
+
+*Question:*
+
+* How would you capture these exceptions without failing the whole batch?
+* Can you store the errors in a custom object called `Batch_Error_Log__c`? Show code snippet.
+#######################################################################################################################################################
+
+8. Mixed DML Issue Handling
+
+**Scenario:**
+You need to create a `User` record and also insert a related `CustomObject__c` record in the same transaction. This throws a **Mixed DML Exception**.
+
+*Question:*
+
+* Write an approach using **Future/Queueable** to solve this.
+* Why is async apex the right choice here?
+#######################################################################################################################################################
