@@ -1,0 +1,32 @@
+org 1:
+1) Apex Class
+
+@RestResource(urlMapping='/accManagement/')
+global class AccountManagement {
+    @HttpGet
+    global static List<Account> getAccount(){
+        Map<String, String> paramsMap = RestContext.request.params;
+        String accIndustry = paramsMap.get('Industry');
+        return [select id, Name,Industry from Account where Industry =:accIndustry order by Name desc limit 5];
+    }
+}
+2) Connected App
+
+
+org 2:;
+1) Auth. Provider
+2) Named Credential
+3) Apex class
+
+public class CalloutToSalesforceOrg {
+    public static void getAccount(){
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint('Callout:SFDC2/services/apexrest/accManagement/');
+        request.setMethod('GET');
+        
+        HttpResponse response = http.send(request);
+        System.debug('Response:::::'+response.getBody());
+        System.debug('Status Code:::::'+response.getStatusCode());
+    }
+}
